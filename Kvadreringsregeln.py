@@ -3,33 +3,53 @@ def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldA
         number1 = input("What is your first term: ")
         number2 = input("What is your second term: ")
 
-    def parse_term(term):
-        term = term.replace(" ", "")
+    result = fix_num(number1, number2, plus_or_minus)
 
-        if "x" not in term:
-            return int(term), 0
+    if shouldPrint:
+        print(result)
 
-        # coefficient
+    return result
+
+def parse_term(term):
+    term = term.replace(" ", "")
+
+    # If there is no x
+    if "x" not in term:
+        return int(term), 0
+
+    # Split coefficient and x-part
+    if "*" in term:
+        parts = term.split("*")
+        # Makes sure making parts[0] an int doesn't give an error
+        if parts[0] == "" or parts[0] == "x":
+            coeff = 1
+        else:
+            coeff = int(parts[0])
+        x_part = parts[1]
+    else:
+        # Handle "3x**2" or "x**2"
         if term.startswith("x"):
-            coefficient = 1
+            coeff = 1
+            x_part = term
         else:
-            coefficient = int(term.split("x")[0])
+            coeff = int(term.split("x")[0])
+            x_part = term[len(str(coeff)):]
 
-        # Exponent
-        if "**" in term:
-            exponent = int(term.split("**")[1])
-        else:
-            exponent = 1
+    # Extract exponent
+    if "**" in x_part:
+        exponent = int(x_part.split("**")[1])
+    else:
+        exponent = 1
 
-        return coefficient, exponent
+    return coeff, exponent
 
-    def add_term(terms, coefficient, exp):
+def add_term(terms, coefficient, exp):
         if exp in terms:
             terms[exp] += coefficient
         else:
             terms[exp] = coefficient
 
-    def format_polynomial(terms):
+def format_polynomial(terms):
         # Sort by exponent descending
         sorted_terms = sorted(terms.items(), key=lambda x: -x[0])
 
@@ -46,7 +66,7 @@ def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldA
 
             coefficient_abs = abs(coefficient)
 
-            # formatting term
+            # Formatting term
             if exp == 0:
                 term = f"{coefficient_abs}"
             elif exp == 1:
@@ -58,7 +78,7 @@ def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldA
 
         return result if result else "0"
 
-    def fix_num(number1, number2, plus_or_minus):
+def fix_num(number1, number2, plus_or_minus):
         a_coefficient, a_exp = parse_term(number1)
         b_coefficient, b_exp = parse_term(number2)
 
@@ -77,10 +97,3 @@ def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldA
         add_term(terms, b_coefficient ** 2, b_exp * 2)
 
         return format_polynomial(terms)
-
-    result = fix_num(number1, number2, plus_or_minus)
-
-    if shouldPrint:
-        print(result)
-
-    return result
