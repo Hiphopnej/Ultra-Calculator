@@ -28,6 +28,3 @@ def fix_num(number1, number2):
     add_term(terms, -(b_coeff ** 2), b_exp * 2)
 
     return format_polynomial(terms)
-
-
-konjugatregeln("x**2", "2", True)
