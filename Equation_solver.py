@@ -212,3 +212,15 @@ def solve_equation(equation):
         raise ValueError("The equation has no solution")
 
     return constant / coefficient
+
+def equation_solver(shouldPrint=False):
+    equation = input("Enter an equation: ")
+
+    try:
+        result = solve_equation(parse_equation(equation))
+        if shouldPrint:
+            print(f"x = {result}")
+        else:
+            return result
+    except ValueError as e:
+        print(f"Error: {e}")

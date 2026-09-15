@@ -5,6 +5,7 @@ from Pytagoras_solver import pytagoras_solver
 from Shape_solver import shape_solver
 from Kvadreringsregeln import kvadreringsregeln
 from Konjugatregeln import konjugatregeln
+from Equation_solver import equation_solver
 from InquirerPy import inquirer
 
 def inquirer_input(message_param, options):
@@ -15,7 +16,16 @@ def inquirer_input(message_param, options):
     return choice
 
 
-choices = ["calculator", "square root", "pq solver", "pytagoras solver", "shape solver", "kvadreringsregeln", "konjugatregeln"]
+choices = [
+    "calculator", 
+    "square root", 
+    "pq solver", 
+    "pytagoras solver", 
+    "shape solver", 
+    "kvadreringsregeln", 
+    "konjugatregeln", 
+    "equation solver"
+    ]
 file_choice = inquirer_input("What do you want to calculate", choices)
 
 if file_choice == "calculator":
@@ -32,3 +42,5 @@ elif file_choice == "kvadreringsregeln":
     kvadreringsregeln(0,0, "", True, True)
 elif file_choice == "konjugatregeln":
     konjugatregeln(0,0, True, True)
+elif file_choice == "equation solver":
+    equation_solver(True)
