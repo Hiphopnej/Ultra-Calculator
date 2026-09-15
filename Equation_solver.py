@@ -25,14 +25,10 @@ class BinaryOp(Node):
     def to_string(self):
         return f"{self.left.to_string()} {self.operator} {self.right.to_string()}"
 
-expression = BinaryOp(
-    BinaryOp(
-        Value(2),
-        "*",
-        Variable("x")
-    ),
-    "+",
-    Value(5)
-)
+class Equation:
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
 
-print(expression.to_string())
+    def to_string(self):
+        return f"{self.left.to_string()} = {self.right.to_string()}"
