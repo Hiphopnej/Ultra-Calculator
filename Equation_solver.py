@@ -142,3 +142,73 @@ def parse_equation(equation):
         parse_expression(left),
         parse_expression(right)
     )
+
+def linear_form(node):
+    if isinstance(node, Value):
+        return 0, node.value
+
+    if isinstance(node, Variable):
+        return 1, 0
+
+    if isinstance(node, BinaryOp):
+        left_coefficient, left_constant = linear_form(node.left)
+        right_coefficient, right_constant = linear_form(node.right)
+
+        if node.operator == "+":
+            return (
+                left_coefficient + right_coefficient,
+                left_constant + right_constant
+            )
+
+        if node.operator == "-":
+            return (
+                left_coefficient - right_coefficient,
+                left_constant - right_constant
+            )
+
+        if node.operator == "*":
+            if left_coefficient != 0 and right_coefficient != 0:
+                raise ValueError("Non-linear expression")
+
+            if left_coefficient != 0:
+                return (
+                    left_coefficient * right_constant,
+                    left_constant * right_constant
+                )
+
+            if right_coefficient != 0:
+                return (
+                    right_coefficient * left_constant,
+                    right_constant * left_constant
+                )
+
+            return 0, left_constant * right_constant
+
+        if node.operator == "/":
+            if right_coefficient != 0:
+                raise ValueError("Cannot divide by an expression containing x")
+
+            if right_constant == 0:
+                raise ValueError("Division by zero")
+
+            return (
+                left_coefficient / right_constant,
+                left_constant / right_constant
+            )
+
+    raise ValueError("Unsupported expression")
+
+def solve_equation(equation):
+    left_coefficient, left_constant = linear_form(equation.left)
+    right_coefficient, right_constant = linear_form(equation.right)
+
+    coefficient = left_coefficient - right_coefficient
+    constant = right_constant - left_constant
+
+    if coefficient == 0:
+        if constant == 0:
+            raise ValueError("The equation has infinitely many solutions")
+
+        raise ValueError("The equation has no solution")
+
+    return constant / coefficient
