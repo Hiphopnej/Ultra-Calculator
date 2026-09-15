@@ -129,3 +129,16 @@ def parse_expression(expression):
         operator,
         parse_expression(right)
     )
+
+def parse_equation(equation):
+    equation = equation.strip()
+
+    if equation.count("=") != 1:
+        raise ValueError("An equation must contain exactly one '='.")
+
+    left, right = equation.split("=")
+
+    return Equation(
+        parse_expression(left),
+        parse_expression(right)
+    )
