@@ -52,3 +52,67 @@ def test_shape_solver_ask(monkeypatch):
     result = shape_solver("2D", "Triangle", shouldAsk=True)
 
     assert result["area"] == 6
+
+# Test 3D shapes
+
+def test_cuboid():
+    result = shape_solver("3D", "Cuboid", base_surface=10, height=5)
+    assert result["volume"] == 50
+
+
+def test_prism():
+    result = shape_solver("3D", "Prism", base_surface=10, height=5)
+    assert result["volume"] == 50
+
+
+def test_cylinder():
+    result = shape_solver("3D", "Cylinder", radius=5, height=10)
+    assert math.isclose(result["volume"], math.pi * 25 * 10)
+    assert math.isclose(result["mantle_area"], 2 * math.pi * 5 * 10)
+
+
+def test_pyramid():
+    result = shape_solver("3D", "Pyramid", base_surface=10, height=6)
+    assert result["volume"] == 20
+
+
+def test_cone():
+    result = shape_solver("3D", "Cone", radius=3, height=4)
+    assert math.isclose(result["volume"], 12 * math.pi)
+    assert math.isclose(result["mantle_area"], 15 * math.pi)
+
+
+def test_sphere():
+    result = shape_solver("3D", "Sphere", radius=3)
+    assert math.isclose(result["volume"], 36 * math.pi)
+    assert math.isclose(result["area"], 36 * math.pi)
+
+# Add the printing/asking tests for 3D
+
+def test_shape_solver_3d_print(capsys):
+    result = shape_solver("3D", "Cylinder", radius=5, height=10, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert math.isclose(result["volume"], math.pi * 25 * 10)
+    assert "The mantle area of the cylinder" in captured.out
+
+def test_shape_solver_3d_ask(monkeypatch):
+    inputs = iter(["10", "5"])
+
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Cuboid", shouldAsk=True)
+
+    assert result["volume"] == 50
+
+# Test without dimensions
+
+def test_shape_solver_missing_dimension():
+    with pytest.raises(ValueError):
+        shape_solver("2D", "Circle")
+
+
+def test_shape_solver_missing_multiple_dimensions():
+    with pytest.raises(ValueError):
+        shape_solver("3D", "Cylinder", radius=5)
