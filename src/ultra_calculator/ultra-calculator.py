@@ -1,11 +1,11 @@
-from Calculator import calculator
-from Square_root_calculator import square_root
-from Pq_solver import pq_solver
-from Pytagoras_solver import pytagoras_solver
-from Shape_solver import shape_solver
-from Kvadreringsregeln import kvadreringsregeln
-from Konjugatregeln import konjugatregeln
-from Equation_solver import equation_solver
+from ultra_calculator.calculator import calculator
+from ultra_calculator.square_root_calculator import square_root
+from ultra_calculator.pq_solver import pq_solver
+from ultra_calculator.pytagoras_solver import pytagoras_solver
+from ultra_calculator.shape_solver import shape_solver
+from ultra_calculator.kvadreringsregeln import kvadreringsregeln
+from ultra_calculator.konjugatregeln import konjugatregeln
+from ultra_calculator.equation_solver import equation_solver
 from InquirerPy import inquirer
 
 def inquirer_input(message_param, options):

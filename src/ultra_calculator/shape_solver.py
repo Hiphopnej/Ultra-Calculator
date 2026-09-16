@@ -1,8 +1,8 @@
 def shape_solver():
     #Gör ett program som räknar ut area och även mantelarean och Omkretsen för vissa former där det är svårt att räkna ut
     import math
-    from Calculator import calculator
-    from Square_root_calculator import square_root
+    from ultra_calculator.calculator import calculator
+    from ultra_calculator.square_root_calculator import square_root
     #Asks what type of shape you want to calculate
     TwoD_or_ThreeD = input("Do you want to calculate shapes in 2D or 3D ")
     Shapes3d = ["Cuboid", "Prism", "Cylinder", "Pyramid", "Cone", "Sphere"]

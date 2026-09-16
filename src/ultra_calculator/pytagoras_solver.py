@@ -1,6 +1,6 @@
 def pytagoras_solver():
-    from Calculator import calculator
-    from Square_root_calculator import square_root
+    from ultra_calculator.calculator import calculator
+    from ultra_calculator.square_root_calculator import square_root
     What_should_be_calulated = input("Which should be calculated: a, b, c ")
     if What_should_be_calulated == "c":
         a = float(input(""))

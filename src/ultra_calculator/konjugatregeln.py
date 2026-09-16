@@ -1,6 +1,6 @@
-from Kvadreringsregeln import parse_term
-from Kvadreringsregeln import add_term
-from Kvadreringsregeln import format_polynomial
+from ultra_calculator.kvadreringsregeln import parse_term
+from ultra_calculator.kvadreringsregeln import add_term
+from ultra_calculator.kvadreringsregeln import format_polynomial
 
 def konjugatregeln(number1, number2, shouldPrint=False, shouldAsk=False):
 
