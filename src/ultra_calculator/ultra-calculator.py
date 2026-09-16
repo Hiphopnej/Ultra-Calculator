@@ -39,7 +39,7 @@ elif file_choice == "pytagoras solver":
 elif file_choice == "shape solver":
     shape_solver()
 elif file_choice == "kvadreringsregeln":
-    kvadreringsregeln(0,0, "", True, True)
+    kvadreringsregeln(None,None,None,True,True)
 elif file_choice == "konjugatregeln":
     konjugatregeln(0,0, True, True)
 elif file_choice == "equation solver":

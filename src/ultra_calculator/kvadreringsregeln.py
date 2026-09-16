@@ -1,8 +1,11 @@
-def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldAsk=False):
+def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=False, shouldAsk=False):
     if shouldAsk:
         number1 = input("What is your first term: ")
         number2 = input("What is your second term: ")
         plus_or_minus = input("Choose + or - ")
+
+    if plus_or_minus not in ("+", "-"):
+        raise ValueError("Operator must be '+' or '-'")
 
     result = fix_num(number1, number2, plus_or_minus)
 
@@ -13,27 +16,22 @@ def kvadreringsregeln(number1, number2, plus_or_minus, shouldPrint=True, shouldA
 
 def parse_term(term):
     term = term.replace(" ", "")
-    term = term.replace("^", "**")  # allow both ^ and **
+    term = term.replace("^", "**")
 
-    # Case: constant
     if "x" not in term:
         return int(term), 0
 
-    # Default values
     coeff = 1
     exponent = 1
 
-    # Handle coefficient
-    if "x" in term:
-        parts = term.split("x")
+    parts = term.split("x")
 
-        if parts[0] not in ("", "+"):
-            if parts[0] == "-":
-                coeff = -1
-            else:
-                coeff = int(parts[0])
+    if parts[0] not in ("", "+"):
+        if parts[0] == "-":
+            coeff = -1
+        else:
+            coeff = int(parts[0])
 
-    # Handle exponent
     if "**" in term:
         exponent = int(term.split("**")[1])
 
@@ -46,15 +44,13 @@ def add_term(terms, coefficient, exp):
         terms[exp] = coefficient
 
 def format_polynomial(terms):
-    # Sort by exponent descending
     sorted_terms = sorted(terms.items(), key=lambda x: -x[0])
-
     result = ""
+
     for exp, coefficient in sorted_terms:
         if coefficient == 0:
             continue
 
-        # Sign handling
         if result == "":
             sign = "-" if coefficient < 0 else ""
         else:
@@ -62,7 +58,6 @@ def format_polynomial(terms):
 
         coefficient_abs = abs(coefficient)
 
-        # Formatting term
         if exp == 0:
             term = f"{coefficient_abs}"
         elif exp == 1:
@@ -80,16 +75,15 @@ def fix_num(number1, number2, plus_or_minus):
 
     terms = {}
 
-    # a^2
     add_term(terms, a_coefficient ** 2, a_exp * 2)
 
-    # +-2ab
     middle_coefficient = 2 * a_coefficient * b_coefficient
+
     if plus_or_minus == "-":
         middle_coefficient *= -1
+
     add_term(terms, middle_coefficient, a_exp + b_exp)
 
-    # b^2
     add_term(terms, b_coefficient ** 2, b_exp * 2)
 
     return format_polynomial(terms)
