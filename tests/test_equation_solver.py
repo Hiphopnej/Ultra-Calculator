@@ -1,5 +1,5 @@
 import pytest
-from ultra_calculator.equation_solver import parse_equation, solve_equation
+from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver
 
 # Normal tests for some simple cases such as negative coefficient
 
@@ -99,3 +99,19 @@ def test_parenthesized_equation():
     equation = parse_equation("(2x + 3) = 11")
 
     assert solve_equation(equation) == 4
+
+# Test printing and asking
+
+def test_equation_solver_print(capsys):
+    result = equation_solver("2x + 4 = 10", shouldPrint=True)
+    captured = capsys.readouterr()
+
+    assert result == 3
+    assert "x = 3" in captured.out
+
+def test_equation_solver_ask(monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _: "2x + 4 = 10")
+
+    result = equation_solver(None, shouldAsk=True)
+
+    assert result == 3

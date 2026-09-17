@@ -213,13 +213,15 @@ def solve_equation(equation):
 
     return constant / coefficient
 
-def equation_solver(shouldPrint=False):
-    equation = input("Enter an equation: ")
+def equation_solver(equation=None, shouldPrint=False, shouldAsk=False):
+    if shouldAsk:
+        equation = input("Enter an equation: ")
 
     try:
         result = solve_equation(parse_equation(equation))
         if shouldPrint:
             print(f"x = {result}")
+            return result
         else:
             return result
     except ValueError as e:

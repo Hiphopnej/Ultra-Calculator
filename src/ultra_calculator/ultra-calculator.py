@@ -29,15 +29,15 @@ choices = [
 file_choice = inquirer_input("What do you want to calculate", choices)
 
 if file_choice == "calculator":
-    calculator(0,"",0,True,True)
+    calculator(None,None,None,True,True)
 elif file_choice == "square root":
-    square_root(0,0, True, True)
+    square_root(None,None, True, True)
 elif file_choice == "pq solver":
-    pq_solver()
+    pq_solver(None,None,True,True)
 elif file_choice == "pytagoras solver":
-    pytagoras_solver()
+    pytagoras_solver(None,None,None,True,True)
 elif file_choice == "shape solver":
-    shape_solver()
+    shape_solver(None,None,True,True)
 elif file_choice == "kvadreringsregeln":
     kvadreringsregeln(None,None,None,True,True)
 elif file_choice == "konjugatregeln":
