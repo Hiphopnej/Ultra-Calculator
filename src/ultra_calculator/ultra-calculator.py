@@ -41,6 +41,6 @@ elif file_choice == "shape solver":
 elif file_choice == "kvadreringsregeln":
     kvadreringsregeln(None,None,None,True,True)
 elif file_choice == "konjugatregeln":
-    konjugatregeln(0,0, True, True)
+    konjugatregeln(None, None, True, True)
 elif file_choice == "equation solver":
-    equation_solver(True)
+    equation_solver(None, True, True)
