@@ -1,5 +1,7 @@
 # Ultra Calculator
 
+[![Tests](https://github.com/Hiphopnej/Ultra-Calculator/actions/workflows/tests.yml/badge.svg)](https://github.com/Hiphopnej/Ultra-Calculator/actions/workflows/tests.yml)
+
 Copyright (C) 2026 Alvar Eklind
 
 This project began in 2023 as an attempt to build my own big calculator containing many different calculators.
