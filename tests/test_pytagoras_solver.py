@@ -20,13 +20,39 @@ def test_pytagoras_solver_invalid_side():
 
 # Test printing
 
-def test_pytagoras_solver_print(capsys):
+def test_side_a_print(capsys):
+    pytagoras_solver("a", b=4, c=5, shouldPrint=True)
+    captured = capsys.readouterr()
+
+    assert "a is 3" in captured.out
+
+def test_side_a_ask(monkeypatch):
+    inputs = iter(["a", "4", "5"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+    result = pytagoras_solver(None, shouldAsk=True)
+
+    assert result == 3
+
+def test_side_b_print(capsys):
+    pytagoras_solver("b", a=4, c=5, shouldPrint=True)
+    captured = capsys.readouterr()
+
+    assert "b is 3" in captured.out
+
+def test_side_b_ask(monkeypatch):
+    inputs = iter(["b", "4", "5"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+    result = pytagoras_solver(None, shouldAsk=True)
+
+    assert result == 3
+
+def test_side_c_print(capsys):
     pytagoras_solver("c", a=3, b=4, shouldPrint=True)
     captured = capsys.readouterr()
 
     assert "c is 5" in captured.out
 
-def test_pytagoras_solver_ask(monkeypatch):
+def test_side_c_ask(monkeypatch):
     inputs = iter(["c", "3", "4"])
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     result = pytagoras_solver(None, shouldAsk=True)
