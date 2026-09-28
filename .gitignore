@@ -2,3 +2,4 @@
 __pycache__/
 *.py[cod]
 src/ultra_calculator.egg-info/
+.coverage
