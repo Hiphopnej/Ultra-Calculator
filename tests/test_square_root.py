@@ -20,3 +20,21 @@ def test_square_root_decimal():
 def test_zero_root():
     with pytest.raises(ZeroDivisionError):
         square_root(16, 0)
+
+# Test print/ask
+
+def test_square_root_print(capsys):
+    result = square_root(25, 2, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 5.0
+    assert "The 2 root of 25 is: 5.0" in captured.out
+
+def test_square_root_ask(monkeypatch):
+    inputs = iter(["2", "25"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = square_root(None, None, shouldAsk=True)
+
+    assert result == 5.0
