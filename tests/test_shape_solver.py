@@ -229,3 +229,152 @@ def test_shape_solver_circle_ask(monkeypatch):
 
     assert result["area"] == 4 * math.pi
     assert result["circumference"] == 4 * math.pi
+
+def test_shape_solver_cuboid_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Cuboid",
+        shouldPrint=True,
+        base_surface=4,
+        height=6
+    )
+
+    captured = capsys.readouterr()
+
+    assert result == {"volume": 24}
+    assert "For a Cuboid with the base surface of 4 and height of 6 the volume is 24" in captured.out
+
+def test_shape_solver_cuboid_ask(monkeypatch):
+    inputs = iter(["4", "6"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Cuboid", shouldAsk=True)
+
+    assert result == {"volume": 24}
+
+def test_shape_solver_prism_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Prism",
+        shouldPrint=True,
+        base_surface=4,
+        height=6
+    )
+
+    captured = capsys.readouterr()
+
+    assert result == {"volume": 24}
+    assert "For a Prism with the base surface of 4 and height of 6 the volume is 24" in captured.out
+
+def test_shape_solver_prism_ask(monkeypatch):
+    inputs = iter(["4", "6"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Prism", shouldAsk=True)
+
+    assert result == {"volume": 24}
+
+def test_shape_solver_cylinder_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Cylinder",
+        shouldPrint=True,
+        radius=2,
+        height=6
+    )
+
+    captured = capsys.readouterr()
+
+    assert result["volume"] == 24 * math.pi
+    assert result["mantle_area"] == 24 * math.pi
+    assert "For a Cylinder with radius 2 and height 6" in captured.out
+    assert "The mantle area of the cylinder is" in captured.out
+
+def test_shape_solver_cylinder_ask(monkeypatch):
+    inputs = iter(["2", "6"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Cylinder", shouldAsk=True)
+
+    assert result["volume"] == 24 * math.pi
+    assert result["mantle_area"] == 24 * math.pi
+
+def test_shape_solver_pyramid_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Pyramid",
+        shouldPrint=True,
+        base_surface=4,
+        height=6
+    )
+
+    captured = capsys.readouterr()
+
+    assert result == {"volume": 8}
+    assert "For a Pyramid with the base surface of 4 and height of 6 the volume is 8" in captured.out
+
+def test_shape_solver_pyramid_ask(monkeypatch):
+    inputs = iter(["4", "6"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Pyramid", shouldAsk=True)
+
+    assert result == {"volume": 8}
+
+def test_shape_solver_cone_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Cone",
+        shouldPrint=True,
+        radius=3,
+        height=4
+    )
+
+    captured = capsys.readouterr()
+
+    assert result["volume"] == 12 * math.pi
+    assert result["mantle_area"] == 15 * math.pi
+    assert "For a Cone with radius 3 and height 4" in captured.out
+    assert "The mantle area is" in captured.out
+
+def test_shape_solver_cone_ask(monkeypatch):
+    inputs = iter(["3", "4"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver("3D", "Cone", shouldAsk=True)
+
+    assert result["volume"] == 12 * math.pi
+    assert result["mantle_area"] == 15 * math.pi
+
+def test_shape_solver_sphere_print(capsys):
+    result = shape_solver(
+        "3D",
+        "Sphere",
+        shouldPrint=True,
+        radius=3
+    )
+
+    captured = capsys.readouterr()
+
+    assert result["volume"] == 36 * math.pi
+    assert result["area"] == 36 * math.pi
+    assert "If the radius of the sphere is 3" in captured.out
+    assert "The area of the sphere is" in captured.out
+
+def test_shape_solver_sphere_ask(monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _: "3")
+
+    result = shape_solver("3D", "Sphere", shouldAsk=True)
+
+    assert result["volume"] == 36 * math.pi
+    assert result["area"] == 36 * math.pi
+
+# Test invalid shape
+
+def test_shape_solver_invalid_2d_shape():
+    with pytest.raises(ValueError, match="Invalid shape"):
+        shape_solver("2D", "Invalid")
+
+def test_shape_solver_invalid_3d_shape():
+    with pytest.raises(ValueError, match="Invalid shape"):
+        shape_solver("3D", "Invalid")
