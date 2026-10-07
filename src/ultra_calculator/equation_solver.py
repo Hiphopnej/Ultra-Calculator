@@ -52,15 +52,12 @@ class Equation:
 def parse_token(token):
     token = token.strip()
 
-    if token == "x" or token == "-x":
-        if token == "-x":
-            return BinaryOp(
-                Value(-1),
-                "*",
-                Variable("x")
-            )
-
-        return Variable("x")
+    if token == "-x":
+        return BinaryOp(
+            Value(-1),
+            "*",
+            Variable("x")
+        )
 
     if token.endswith("x"):
         coefficient = token[:-1]
