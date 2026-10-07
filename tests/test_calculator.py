@@ -43,3 +43,59 @@ def test_decimal_numbers():
 def test_invalid_operator():
     with pytest.raises(ValueError):
         calculator(5, "?", 3)
+
+def test_addition_print(capsys):
+    result = calculator(5, "+", 3, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 8
+    assert captured.out == "8\n"
+
+def test_subtraction_print(capsys):
+    result = calculator(7, "-", 2, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 5
+    assert captured.out == "5\n"
+
+def test_multiplication_print(capsys):
+    result = calculator(5, "*", 9, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 45
+    assert captured.out == "45\n"
+
+def test_division_print(capsys):
+    result = calculator(45, "/", 5, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 9.0
+    assert captured.out == "9.0\n"
+
+def test_exponent_print(capsys):
+    result = calculator(4, "**", 2, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 16
+    assert captured.out == "16\n"
+
+def test_modulo_print(capsys):
+    result = calculator(8, "%", 2, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert result == 0
+    assert captured.out == "0\n"
+
+def test_calculator_ask(monkeypatch):
+    inputs = iter(["7", "+", "5"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = calculator(None, None, None, shouldAsk=True)
+
+    assert result == 12

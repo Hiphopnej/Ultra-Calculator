@@ -36,3 +36,19 @@ def test_pq_solver_ask(monkeypatch):
 
     assert x1 == 3
     assert x2 == 2
+
+def test_pq_solver_print_purely_imaginary(capsys):
+    pq_solver(0, 4, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert "2.0i" in captured.out
+    assert "-2.0i" in captured.out
+
+def test_pq_solver_print_complex(capsys):
+    pq_solver(2, 5, shouldPrint=True)
+
+    captured = capsys.readouterr()
+
+    assert "-1.0 + 2.0i" in captured.out
+    assert "-1.0 - 2.0i" in captured.out
