@@ -6,14 +6,7 @@ from ultra_calculator.shape_solver import shape_solver
 from ultra_calculator.kvadreringsregeln import kvadreringsregeln
 from ultra_calculator.konjugatregeln import konjugatregeln
 from ultra_calculator.equation_solver import equation_solver
-from InquirerPy import inquirer
-
-def inquirer_input(message_param, options):
-    choice = inquirer.select(
-        message=message_param,
-        choices=options
-    ).execute()
-    return choice
+from ultra_calculator.text_functions import inquirer_input
 
 def main():
     choices = [
@@ -31,6 +24,7 @@ def main():
 
     if file_choice == "calculator":
         calculator(None,None,None,True,True)
+        pass
     elif file_choice == "square root":
         square_root(None,None, True, True)
     elif file_choice == "pq solver":

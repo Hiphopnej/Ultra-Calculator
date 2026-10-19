@@ -1,5 +1,5 @@
 import math
-
+from ultra_calculator.text_functions import inquirer_input
 
 def get_dimensions(dimensions, *required):
     for name in required:
@@ -8,8 +8,14 @@ def get_dimensions(dimensions, *required):
 
 
 def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensions):
+    if shouldAsk and (dimension is None or shape is None):
+        dimension = inquirer_input("Choose a dimension", ["2D", "3D"])
+        if dimension == "2D": 
+            shape = inquirer_input("Choose a shape", ["Triangle", "Rectangle", "Parallellogram", "Parallel_trapezoid", "Circle"])
+        elif dimension == "3D":
+            shape = inquirer_input("Choose a shape", ["Cuboid", "Prism", "Cylinder", "Pyramid", "Cone", "Sphere"])
     if dimension == "2D":
-        if shape == "Triangle":
+        if shape.lower() == "triangle":
             if shouldAsk:
                 dimensions["base"] = float(input("What is the base of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -27,7 +33,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Rectangle":
+        if shape.lower() == "rectangle":
             if shouldAsk:
                 dimensions["base"] = float(input("What is the base of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -45,7 +51,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Parallellogram":
+        if shape.lower() == "parallellogram":
             if shouldAsk:
                 dimensions["base"] = float(input("What is the base of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -63,7 +69,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Parallel_trapezoid":
+        if shape.lower() == "parallel_trapezoid":
             if shouldAsk:
                 dimensions["side_a"] = float(input("How long is the short side "))
                 dimensions["side_b"] = float(input("How long is the long side "))
@@ -83,7 +89,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Circle":
+        if shape.lower() == "circle":
             if shouldAsk:
                 dimensions["radius"] = float(input("What is the radius of the circle "))
 
@@ -106,7 +112,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
         raise ValueError("Invalid shape")
 
     if dimension == "3D":
-        if shape == "Cuboid":
+        if shape.lower() == "cuboid":
             if shouldAsk:
                 dimensions["base_surface"] = float(input("What is the base surface of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -124,7 +130,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Prism":
+        if shape.lower() == "prism":
             if shouldAsk:
                 dimensions["base_surface"] = float(input("What is the base surface of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -142,7 +148,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Cylinder":
+        if shape.lower() == "cylinder":
             if shouldAsk:
                 dimensions["radius"] = float(input("What is the radius of the base surface "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -165,7 +171,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Pyramid":
+        if shape.lower() == "pyramid":
             if shouldAsk:
                 dimensions["base_surface"] = float(input("What is the base surface of the object "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -183,7 +189,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Cone":
+        if shape.lower() == "cone":
             if shouldAsk:
                 dimensions["radius"] = float(input("What is the radius of the base surface "))
                 dimensions["height"] = float(input("What is the height of the object "))
@@ -207,7 +213,7 @@ def shape_solver(dimension, shape, shouldPrint=False, shouldAsk=False, **dimensi
 
             return result
 
-        if shape == "Sphere":
+        if shape.lower() == "sphere":
             if shouldAsk:
                 dimensions["radius"] = float(input("What is the radius of the object "))
 

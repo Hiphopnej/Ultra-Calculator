@@ -44,16 +44,66 @@ def test_shape_solver_print(capsys):
     assert "The area for a triangle" in captured.out
     assert "6" in captured.out
 
-def test_shape_solver_ask(monkeypatch):
-    inputs = iter(["3", "4"])
+def test_shape_solver_ask(monkeypatch, capsys):
+    choices = iter(["2D", "Triangle"])
+    inputs = iter(["10", "5"])
 
+    monkeypatch.setattr(
+        "ultra_calculator.shape_solver.inquirer_input",
+        lambda message, options: next(choices)
+    )
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
 
-    result = shape_solver("2D", "Triangle", shouldAsk=True)
+    result = shape_solver(None, None, shouldPrint=True, shouldAsk=True)
 
-    assert result["area"] == 6
+    captured = capsys.readouterr()
+
+    assert result == {"area": 25.0}
+    assert "25.0" in captured.out
+
+def test_shape_solver_ask_selects_shape(monkeypatch):
+    choices = iter(["2D", "Triangle"])
+    inputs = iter(["4", "6"])
+
+    monkeypatch.setattr(
+        "ultra_calculator.shape_solver.inquirer_input",
+        lambda message, options: next(choices)
+    )
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver(None, None, shouldAsk=True)
+
+    assert result == {"area": 12}
 
 # Test 3D shapes
+
+def test_shape_solver_ask_selects_3d_shape(monkeypatch):
+    choices = iter(["3D", "Sphere"])
+    inputs = iter(["3"])
+
+    def mock_inquirer_input(message, options):
+        if message == "Choose a dimension":
+            assert options == ["2D", "3D"]
+        elif message == "Choose a shape":
+            assert options == [
+                "Cuboid", "Prism", "Cylinder",
+                "Pyramid", "Cone", "Sphere"
+            ]
+
+        return next(choices)
+
+    monkeypatch.setattr(
+        "ultra_calculator.shape_solver.inquirer_input",
+        mock_inquirer_input
+    )
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = shape_solver(None, None, shouldAsk=True)
+
+    assert result == {
+        "volume": 36 * 3.141592653589793,
+        "area": 36 * 3.141592653589793
+    }
 
 def test_cuboid():
     result = shape_solver("3D", "Cuboid", base_surface=10, height=5)
