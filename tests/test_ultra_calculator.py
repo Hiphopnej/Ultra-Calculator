@@ -1,26 +1,36 @@
 import pytest
 import sys
 import subprocess
-from ultra_calculator.ultra_calculator import inquirer_input, main
-import ultra_calculator.ultra_calculator as ultra_calculator
+from ultra_calculator.main import main
+from ultra_calculator.text_functions import inquirer_input
+import ultra_calculator.main as ultra_calculator
 
 def test_inquirer_input(monkeypatch):
     class FakeSelect:
         def execute(self):
             return "calculator"
 
-    monkeypatch.setattr("ultra_calculator.ultra_calculator.inquirer.select", lambda **kwargs: FakeSelect())
+    monkeypatch.setattr(
+        "ultra_calculator.text_functions.inquirer.select",
+        lambda **kwargs: FakeSelect()
+    )
 
     result = inquirer_input("What do you want to calculate", ["calculator"])
 
     assert result == "calculator"
 
 def test_main_calculator(monkeypatch):
-    monkeypatch.setattr("ultra_calculator.ultra_calculator.inquirer_input", lambda message, options: "calculator")
+    monkeypatch.setattr(
+        "ultra_calculator.main.inquirer_input",
+        lambda message, options: "calculator"
+    )
 
     called = []
 
-    monkeypatch.setattr("ultra_calculator.ultra_calculator.calculator", lambda *args: called.append(args))
+    monkeypatch.setattr(
+        "ultra_calculator.main.calculator",
+        lambda *args: called.append(args)
+    )
 
     main()
 
@@ -52,6 +62,6 @@ def test_main_choices(monkeypatch, choice, function_name, expected_args):
     assert called == [expected_args]
 
 def test_import_does_not_run_main():
-    result = subprocess.run([sys.executable, "-c", "import ultra_calculator.ultra_calculator"], capture_output=True, text=True)
+    result = subprocess.run([sys.executable, "-c", "import ultra_calculator.main"], capture_output=True, text=True)
 
     assert result.returncode == 0
