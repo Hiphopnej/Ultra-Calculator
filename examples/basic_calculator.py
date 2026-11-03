@@ -2,9 +2,8 @@ from ultra_calculator.calculator import calculator
 
 # This code calculates 10 + 5 and prints it out. The expected output is 15
 calculator(10, "+", 5, True)
-
 # This code calculates 2 raised to 3 and prints it out. The expected output is 8
 calculator(2, "**", 3, True)
 
-# Ask you what to calculate and prints it out
-calculator(None,None,None,True,True)
+# Ask for numbers and operator, and calculates and then prints them out
+calculator(None, None, None, True, True)
