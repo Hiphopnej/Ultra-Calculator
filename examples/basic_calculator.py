@@ -4,3 +4,6 @@ from ultra_calculator.calculator import calculator
 calculator(10, "+", 5, True)
 # This code calculates 2 raised to 3 and prints it out. The expected output is 8
 calculator(2, "**", 3, True)
+
+# Ask for numbers and operator, and calculates and then prints them out
+calculator(None, None, None, True, True)

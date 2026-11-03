@@ -11,3 +11,6 @@ pq_solver(-5, 6, True)
 # and 
 # x2 = -1.0 - 2.0i
 pq_solver(2, 5, True)
+
+# Ask for numbers and runs pq_solver on them and then prints them out
+pq_solver(None, None, True, True)
