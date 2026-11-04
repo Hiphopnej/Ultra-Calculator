@@ -30,3 +30,16 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
             if shouldPrint:
                 print(f"The cosine of {value} in degrees is {answer}")
             return answer
+    elif function.lower() == "tan":
+        if radians_or_degrees.lower() == "radians":
+            answer = round(math.tan(value), ROUNDING)
+            if shouldPrint:
+                print(f"The tangent of {value} in radians is {answer}")
+            return answer
+        elif radians_or_degrees.lower() == "degrees":
+            answer = round(math.tan(value*(math.pi/180)), ROUNDING)
+            if answer == -0.0:
+                answer = abs(answer)
+            if shouldPrint:
+                print(f"The tangent of {value} in degrees is {answer}")
+            return answer
