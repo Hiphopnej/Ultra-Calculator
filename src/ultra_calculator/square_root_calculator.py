@@ -1,5 +1,6 @@
+from ultra_calculator.calculator import calculator
+
 def square_root(number, root, shouldPrint=False, shouldAsk=False):
-    from ultra_calculator.calculator import calculator
     if shouldAsk:
         root = float(input("Which root do want to use? "))
         number = float(input("What number to you want to root? "))
