@@ -69,3 +69,14 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
             if shouldPrint:
                 print(f"The arccos of {value} in degrees is {answer}")
             return answer
+    elif function.lower() == "arctan":
+        if radians_or_degrees.lower() == "radians":
+            answer = round(math.atan(value), ROUNDING)
+            if shouldPrint:
+                print(f"The arctan of {value} in radians is {answer}")
+            return answer
+        elif radians_or_degrees.lower() == "degrees":
+            answer = round((math.atan(value)*(180/math.pi)), ROUNDING)
+            if shouldPrint:
+                print(f"The arctan of {value} in degrees is {answer}")
+            return answer
