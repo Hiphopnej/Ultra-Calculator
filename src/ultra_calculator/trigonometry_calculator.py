@@ -1,4 +1,4 @@
-from ultra_calculator.text_functions import inquirer_input
+from ultra_calculator.text_functions import inquirer_input, get_valid_input
 import math
 
 def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
@@ -7,8 +7,26 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
     ROUNDING = 10
     if shouldAsk:
         function = inquirer_input("What do you want to calculate?", ["Sin", "Cos", "Tan", "Arcsin", "Arccos", "Arctan"])
-        value = float(input("What number do you want to cacluate on? "))
         radians_or_degrees = inquirer_input("", ["Radians", "Degrees"])
+
+        if function.lower() in ["arcsin", "arccos"]:
+            value = get_valid_input(
+                "What number do you want to calculate on? ",
+                float,
+                lambda value: -1 <= value <= 1,
+                "The value must be between -1 and 1."
+            )
+        else:
+            value = get_valid_input(
+                "What number do you want to calculate on? ",
+                float
+            )
+
+    if function.lower() not in ["sin", "cos", "tan", "arcsin", "arccos", "arctan"]:
+            raise ValueError("Invalid trigonometric function")
+    
+    if radians_or_degrees.lower() not in ["radians", "degrees"]:
+        raise ValueError("Invalid angle unit")
     
     if function.lower() == "sin":
         if radians_or_degrees.lower() == "radians":
@@ -20,7 +38,7 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
             # If you multiply a value in degrees with pi/180 you get it in radians
             answer = round(math.sin(value*(math.pi/180)), ROUNDING)
             if shouldPrint:
-                print(f"The sine of {value} in radians is {answer}")
+                print(f"The sine of {value} in degrees is {answer}")
             return answer
     elif function.lower() == "cos":
         if radians_or_degrees.lower() == "radians":
@@ -80,3 +98,5 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
             if shouldPrint:
                 print(f"The arctan of {value} in degrees is {answer}")
             return answer
+
+trigonometry(None,None,None,True,True)
