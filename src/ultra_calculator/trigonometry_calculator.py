@@ -1,7 +1,7 @@
 from ultra_calculator.text_functions import inquirer_input, get_valid_input
 import math
 
-def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
+def trigonometry(function, value, radians_or_degrees, shouldPrint=False, shouldAsk=False):
     # Adds the varible ROUNDING for how many decimal everything should be round to.
     # This is to avoid the impreciseness of float.
     ROUNDING = 10
@@ -98,5 +98,3 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint, shouldAsk):
             if shouldPrint:
                 print(f"The arctan of {value} in degrees is {answer}")
             return answer
-
-trigonometry(None,None,None,True,True)
