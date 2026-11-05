@@ -59,9 +59,6 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint=False, shouldA
             return answer
         elif radians_or_degrees.lower() == "degrees":
             answer = round(math.tan(value*(math.pi/180)), ROUNDING)
-            # Avoids -0.0 because of wierd float stuff
-            if answer == -0.0:
-                answer = abs(answer)
             if shouldPrint:
                 print(f"The tangent of {value} in degrees is {answer}")
             return answer

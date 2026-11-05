@@ -47,11 +47,17 @@ def test_invalid_angle_unit(unit):
     "function, value, unit, expected",
     [
         ("sin", 90, "degrees", "The sine of 90 in degrees is 1.0"),
+        ("sin", math.pi / 2, "radians", "The sine of 1.5707963267948966 in radians is 1.0"),
+        ("cos", 0, "degrees", "The cosine of 0 in degrees is 1.0"),
         ("cos", 0, "radians", "The cosine of 0 in radians is 1.0"),
         ("tan", 45, "degrees", "The tangent of 45 in degrees is 1.0"),
+        ("tan", math.pi / 4, "radians", "The tangent of 0.7853981633974483 in radians is 1.0"),
         ("arcsin", 1, "degrees", "The arcsine of 1 in degrees is 90.0"),
+        ("arcsin", 1, "radians", "The arcsine of 1 in radians is 1.5707963268"),
         ("arccos", 0, "degrees", "The arccos of 0 in degrees is 90.0"),
+        ("arccos", 0, "radians", "The arccos of 0 in radians is 1.5707963268"),
         ("arctan", 1, "degrees", "The arctan of 1 in degrees is 45.0"),
+        ("arctan", 1, "radians", "The arctan of 1 in radians is 0.7853981634"),
     ]
 )
 def test_trigonometry_print(function, value, unit, expected, capsys):
