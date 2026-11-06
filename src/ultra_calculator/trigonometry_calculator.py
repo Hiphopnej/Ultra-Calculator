@@ -31,23 +31,31 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint=False, shouldA
     if function.lower() == "sin":
         if radians_or_degrees.lower() == "radians":
             answer = round(math.sin(value), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The sine of {value} in radians is {answer}")
             return answer
         elif radians_or_degrees.lower() == "degrees":
             # If you multiply a value in degrees with pi/180 you get it in radians
             answer = round(math.sin(value*(math.pi/180)), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The sine of {value} in degrees is {answer}")
             return answer
     elif function.lower() == "cos":
         if radians_or_degrees.lower() == "radians":
             answer = round(math.cos(value), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The cosine of {value} in radians is {answer}")
             return answer
         elif radians_or_degrees.lower() == "degrees":
             answer = round(math.cos(value*(math.pi/180)), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The cosine of {value} in degrees is {answer}")
             return answer
@@ -59,6 +67,8 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint=False, shouldA
             return answer
         elif radians_or_degrees.lower() == "degrees":
             answer = round(math.tan(value*(math.pi/180)), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The tangent of {value} in degrees is {answer}")
             return answer
