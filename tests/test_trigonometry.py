@@ -113,3 +113,60 @@ def test_trigonometry_inverse_input_validation(monkeypatch, function, expected):
     result = trigonometry(None, None, None, False, True)
 
     assert result == expected
+
+def test_tan_negative_zero_degrees():
+    result = trigonometry("tan", -0.0, "degrees", False, False)
+
+    assert result == 0.0
+    assert str(result) == "0.0"
+
+@pytest.mark.parametrize("function", ["arcsin", "arccos"])
+@pytest.mark.parametrize("value", [-1.1, 1.1])
+def test_inverse_trig_out_of_range(function, value):
+    with pytest.raises(ValueError):
+        trigonometry(function, value, "degrees", False, False)
+
+@pytest.mark.parametrize("unit", ["radians", "degrees"])
+def test_sin_negative_zero(unit):
+    result = trigonometry("sin", -0.0, unit, False, False)
+
+    assert str(result) == "0.0"
+
+@pytest.mark.parametrize("unit", ["radians", "degrees"])
+def test_cos_negative_zero(unit):
+    result = trigonometry("cos", math.pi / 2 if unit == "radians" else 90, unit, False, False)
+
+    assert str(result) == "0.0"
+
+def test_tan_90_degrees():
+    result = trigonometry("tan", 90, "degrees", False, False)
+
+    assert abs(result) > 1e10
+
+@pytest.mark.parametrize(
+    "function, value, expected",
+    [
+        ("arcsin", -1, -90),
+        ("arcsin", 1, 90),
+        ("arccos", -1, 180),
+        ("arccos", 1, 0),
+    ]
+)
+def test_inverse_trig_boundaries(function, value, expected):
+    result = trigonometry(function, value, "degrees", False, False)
+
+    assert result == expected
+
+@pytest.mark.parametrize(
+    "function, value, unit, expected",
+    [
+        ("SIN", 90, "DEGREES", 1.0),
+        ("Cos", 0, "Degrees", 1.0),
+        ("tAn", 45, "Degrees", 1.0),
+        ("Arcsin", 1, "Degrees", 90.0),
+    ]
+)
+def test_trigonometry_case_insensitive(function, value, unit, expected):
+    result = trigonometry(function, value, unit, False, False)
+
+    assert result == expected
