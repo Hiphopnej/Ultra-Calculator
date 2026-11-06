@@ -62,6 +62,8 @@ def trigonometry(function, value, radians_or_degrees, shouldPrint=False, shouldA
     elif function.lower() == "tan":
         if radians_or_degrees.lower() == "radians":
             answer = round(math.tan(value), ROUNDING)
+            if answer == 0:
+                answer = abs(answer)
             if shouldPrint:
                 print(f"The tangent of {value} in radians is {answer}")
             return answer
