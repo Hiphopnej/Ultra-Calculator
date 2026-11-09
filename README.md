@@ -53,6 +53,15 @@ python -m ultra_calculator.ultra_calculator
 ```
 
 ## Usage
+You can import individual calculators and use them independently.
+For example, the trigonometry calculator
+```python
+from ultra_calculator.trigonometry_calculator import trigonometry
+
+result = trigonometry("sin", 90, "degrees")
+print(result)
+```
+This calculates the sin of 90 degrees and prints the result.
 
 ## Running Tests
 
