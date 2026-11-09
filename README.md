@@ -24,10 +24,18 @@ This project began in 2023 as an attempt to build my own big calculator containi
 - Kvadreringsregeln
 - Konjugatregeln
 - Linear equation solver
+- Trigonometry calculator
+  - Sine
+  - Cosine
+  - Tangent
+  - Arcsine
+  - Arccosine
+  - Arctangent
+  - Supports both radians and degrees
 
 ## Requirements
 - Python 3.11 or newer
-- InquirerPy
+- InquirerPy 0.3.4 or newer (below 0.4)
 
 ## Installation
 
@@ -75,9 +83,31 @@ Ultra-Calculator/
 │       ├── pytagoras_solver.py
 │       ├── shape_solver.py
 │       ├── square_root_calculator.py
-│       └── ultra_calculator.py
+│       ├── trigonometry_calculator.py
+│       └── main.py
 ├── tests/
+│       ├── test_calculator.py
+│       ├── test_squation_solver.py
+│       ├── test_konjugatregeln.py
+│       ├── test_kvadreringsregeln.py
+│       ├── test_pq_solver.py
+│       ├── test_pytagoras_solver.py
+│       ├── test_shape_solver.py
+│       ├── test_square_root.py
+│       ├── test_text_functions.py
+│       ├── test_trigonometry.py
+│       ├── test_ultra_calculator.py
+│       └── test_valid_input.py
 ├── examples/
+│       ├── basic_calculator.py
+│       ├── equations.py
+│       ├── geometry.py
+│       ├── konjugatregeln.py
+│       ├── kvadreringsregeln.py
+│       ├── pq.py
+│       ├── pytagoras.py
+│       ├── square_root.py
+│       └── trigonometry.py
 ├── .gitignore
 ├── LICENSE
 ├── pyproject.toml
