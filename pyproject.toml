@@ -7,9 +7,7 @@ name = "ultra_calculator"
 version = "0.3.0"
 description = "A collection of calculators and mathematical solvers."
 requires-python = ">=3.11"
-dependencies = [
-    "InquirerPy"
-]
+dependencies = ["InquirerPy>=0.3.4,<0.4"]
 
 [project.optional-dependencies]
 dev = [
