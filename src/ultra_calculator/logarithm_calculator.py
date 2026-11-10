@@ -33,3 +33,4 @@ def logarithm_calculator(value, base, shouldPrint, shouldAsk):
         result = log(value, base)
         if shouldPrint:
             print(f"The logarithm of {value} with base {base} is {result}")
+        return result
