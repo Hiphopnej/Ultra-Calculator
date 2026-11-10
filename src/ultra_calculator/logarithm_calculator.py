@@ -1,7 +1,7 @@
 from math import log, isfinite
 from ultra_calculator.text_functions import get_valid_input
 
-def logarithm_calculator(value, base, shouldPrint, shouldAsk):
+def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
     # Creates a function for checking if the base is e
     def convert_base(base):
         if base.lower() == "e":
