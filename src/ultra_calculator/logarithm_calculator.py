@@ -37,8 +37,8 @@ def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
 
             if not isfinite(base) or base <= 1:
                 raise ValueError("The base must be finite and greater than 1.")
-        if base == 2.718281828459045:
-            base = None
+            if (base-0.0000000000001) < 2.718281828459045 < (base+0.0000000000001):
+                base = None
     if base is None: # If base is None that means no base should be used which log interprets as e
         result = log(value)
         if shouldPrint:
