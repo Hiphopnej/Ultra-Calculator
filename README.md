@@ -32,6 +32,10 @@ This project began in 2023 as an attempt to build my own big calculator containi
   - Arccosine
   - Arctangent
   - Supports both radians and degrees
+- Logarithms
+  - Any float number above 0
+  - Any float base
+  - Base e
 
 ## Requirements
 - Python 3.11 or newer
@@ -93,6 +97,7 @@ Ultra-Calculator/
 │       ├── shape_solver.py
 │       ├── square_root_calculator.py
 │       ├── trigonometry_calculator.py
+│       ├── logarithm_calculator.py
 │       └── main.py
 ├── tests/
 │       ├── test_calculator.py
@@ -105,6 +110,7 @@ Ultra-Calculator/
 │       ├── test_square_root.py
 │       ├── test_text_functions.py
 │       ├── test_trigonometry.py
+│       ├── test_logarithm_calculator.py
 │       ├── test_ultra_calculator.py
 │       └── test_valid_input.py
 ├── examples/
@@ -116,7 +122,8 @@ Ultra-Calculator/
 │       ├── pq.py
 │       ├── pytagoras.py
 │       ├── square_root.py
-│       └── trigonometry.py
+│       ├── trigonometry.py
+│       └── logarithms.py
 ├── .gitignore
 ├── LICENSE
 ├── pyproject.toml
