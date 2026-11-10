@@ -6,6 +6,7 @@ from ultra_calculator.shape_solver import shape_solver
 from ultra_calculator.kvadreringsregeln import kvadreringsregeln
 from ultra_calculator.konjugatregeln import konjugatregeln
 from ultra_calculator.equation_solver import equation_solver
+from ultra_calculator.trigonometry_calculator import trigonometry
 from ultra_calculator.text_functions import inquirer_input
 
 def main():
@@ -17,7 +18,8 @@ def main():
     "shape solver", 
     "kvadreringsregeln", 
     "konjugatregeln", 
-    "equation solver"
+    "equation solver",
+    "trigonometry"
     ]
 
     file_choice = inquirer_input("What do you want to calculate", choices)
@@ -39,6 +41,8 @@ def main():
         konjugatregeln(None, None, True, True)
     elif file_choice == "equation solver":
         equation_solver(None, True, True)
+    elif file_choice == "trigonometry":
+        trigonometry(None,None,None,True,True)
 
 if __name__ == "__main__": # pragma: no cover
     main() # pragma: no cover

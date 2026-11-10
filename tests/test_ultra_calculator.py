@@ -47,6 +47,7 @@ def test_main_calculator(monkeypatch):
         ("kvadreringsregeln", "kvadreringsregeln", (None, None, None, True, True)),
         ("konjugatregeln", "konjugatregeln", (None, None, True, True)),
         ("equation solver", "equation_solver", (None, True, True)),
+        ("trigonometry", "trigonometry", (None,None,None,True,True))
     ],
 )
 
