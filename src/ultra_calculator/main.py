@@ -8,6 +8,7 @@ from ultra_calculator.konjugatregeln import konjugatregeln
 from ultra_calculator.equation_solver import equation_solver
 from ultra_calculator.trigonometry_calculator import trigonometry
 from ultra_calculator.text_functions import inquirer_input
+from ultra_calculator.logarithm_calculator import logarithm_calculator
 
 def main():
     choices = [
@@ -19,7 +20,8 @@ def main():
     "kvadreringsregeln", 
     "konjugatregeln", 
     "equation solver",
-    "trigonometry"
+    "trigonometry",
+    "logarithms"
     ]
 
     file_choice = inquirer_input("What do you want to calculate", choices)
@@ -43,6 +45,8 @@ def main():
         equation_solver(None, True, True)
     elif file_choice == "trigonometry":
         trigonometry(None,None,None,True,True)
+    elif file_choice == "logarithms":
+        logarithm_calculator(None,None,True,True)
 
 if __name__ == "__main__": # pragma: no cover
     main() # pragma: no cover
