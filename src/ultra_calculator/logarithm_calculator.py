@@ -1,4 +1,5 @@
 from math import log, isfinite
+from math import e as math_e
 from ultra_calculator.text_functions import get_valid_input
 
 def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
@@ -8,13 +9,18 @@ def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
             return None
         return float(base)
 
+    def convert_value(value):
+        if isinstance(value, str) and value.lower() == "e":
+            return math_e
+        return float(value)
+
     if shouldAsk:
         # Makes sure value is above 0 because otherwise log will give an error
         value = get_valid_input(
             "What number do you want to calculate on? ",
-            float,
+            convert_value,
             lambda value: isfinite(value) and value > 0,
-            "The number has to be greater than 0."
+            "The number has to finite and be greater than 0."
         )
 
         # Makes sure base is e or above 1 because otherwise log will give an error
@@ -25,6 +31,11 @@ def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
             "Enter 'e' or a number greater than 1."
         )
     else:
+        if isinstance(value, str):
+            if value.lower() == "e":
+                value = math_e
+            else:
+                raise TypeError("The number must be an integer, float, or 'e'.")
         if isinstance(value, bool) or not isinstance(value, (int, float)):
             raise TypeError("The number must be an integer or float.")
 
@@ -41,11 +52,15 @@ def logarithm_calculator(value, base, shouldPrint=False, shouldAsk=False):
                 base = None
     if base is None: # If base is None that means no base should be used which log interprets as e
         result = log(value)
+        if (value-0.0000000000001) < 2.718281828459045 < (value+0.0000000000001):
+            value = "e"
         if shouldPrint:
             print(f"The logarithm of {value} with base e is {result}")
         return result
     else: # Otherwise use the base given by the user
         result = log(value, base)
+        if (value-0.0000000000001) < 2.718281828459045 < (value+0.0000000000001):
+            value = "e"
         if shouldPrint:
             print(f"The logarithm of {value} with base {base} is {result}")
         return result

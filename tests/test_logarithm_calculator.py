@@ -15,7 +15,7 @@ def test_natural_logarithm_print(capsys):
     logarithm_calculator(e, None, True, False)
 
     captured = capsys.readouterr()
-    assert captured.out == "The logarithm of 2.718281828459045 with base e is 1.0\n"
+    assert captured.out == "The logarithm of e with base e is 1.0\n"
 
 def test_logarithm_with_base_print(capsys):
     logarithm_calculator(8, 2, True, False)
@@ -141,3 +141,18 @@ def test_logarithm_ask_float_base(monkeypatch):
     result = logarithm_calculator(None, None, False, True)
 
     assert result == pytest.approx(log(8, 2.5))
+
+
+def test_logarithm_e_as_value(monkeypatch):
+    inputs = iter(["e", "2"])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
+    result = logarithm_calculator(None, None, False, True)
+
+    assert result == pytest.approx(log(e, 2))
+
+
+def test_logarithm_e_as_value_direct():
+    result = logarithm_calculator("e", 2, False, False)
+
+    assert result == pytest.approx(log(e, 2))
