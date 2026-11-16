@@ -58,7 +58,7 @@ cd Ultra-Calculator
 Run the calculator with:
 
 ```bash
-python -m ultra_calculator.ultra_calculator
+python -m ultra_calculator.main
 ```
 
 ## Usage
