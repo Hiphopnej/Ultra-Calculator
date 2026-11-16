@@ -36,6 +36,11 @@ This project began in 2023 as an attempt to build my own big calculator containi
   - Any float number above 0
   - Any float base
   - Base e
+- Quadratic formula
+  - Real numbers
+  - Real solutions
+  - Imaginary numbers
+  - Imaginary solutions
 
 ## Requirements
 - Python 3.11 or newer
@@ -98,6 +103,7 @@ Ultra-Calculator/
 │       ├── square_root_calculator.py
 │       ├── trigonometry_calculator.py
 │       ├── logarithm_calculator.py
+│       ├── quadratic_formula_calculator.py
 │       └── main.py
 ├── tests/
 │       ├── test_calculator.py
@@ -111,6 +117,7 @@ Ultra-Calculator/
 │       ├── test_text_functions.py
 │       ├── test_trigonometry.py
 │       ├── test_logarithm_calculator.py
+│       ├── test_quadratic_formula_calculator.py
 │       ├── test_ultra_calculator.py
 │       └── test_valid_input.py
 ├── examples/
@@ -123,7 +130,8 @@ Ultra-Calculator/
 │       ├── pytagoras.py
 │       ├── square_root.py
 │       ├── trigonometry.py
-│       └── logarithms.py
+│       ├── logarithms.py
+│       └── quadratic_formula.py
 ├── .gitignore
 ├── LICENSE
 ├── pyproject.toml
