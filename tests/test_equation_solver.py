@@ -164,7 +164,7 @@ def test_binary_op_precedence():
     assert BinaryOp(Value(1), "-", Value(2)).precedence() == 1
     assert BinaryOp(Value(1), "*", Value(2)).precedence() == 2
     assert BinaryOp(Value(1), "/", Value(2)).precedence() == 2
-    assert BinaryOp(Value(1), "^", Value(2)).precedence() == 0
+    assert BinaryOp(Value(1), "^", Value(2)).precedence() == 3
 
 # Parse token tests
 
