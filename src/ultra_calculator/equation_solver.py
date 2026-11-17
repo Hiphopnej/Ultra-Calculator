@@ -27,17 +27,25 @@ class BinaryOp(Node):
             return 1
         if self.operator in ("*", "/"):
             return 2
+        if self.operator == "^":
+            return 3
         return 0
 
     def to_string(self):
         left = self.left.to_string()
         right = self.right.to_string()
 
-        if isinstance(self.left, BinaryOp) and self.left.precedence() < self.precedence():
+        if isinstance(self.left, BinaryOp) and (self.left.precedence() < self.precedence() or (self.operator == "^" and self.left.operator == "^")):
             left = f"({left})"
 
-        if isinstance(self.right, BinaryOp) and self.right.precedence() < self.precedence():
-            right = f"({right})"
+        if isinstance(self.right, BinaryOp) and (self.right.precedence() < self.precedence() or (self.operator == "-" and self.right.operator in ("+", "-")) or (self.operator == "/" and self.right.operator in ("*", "/"))):
+            if self.right.precedence() < self.precedence():
+                right = f"({right})"
+            elif self.right.precedence() == self.precedence():
+                if self.operator == "-" and self.right.operator in ("+", "-"):
+                    right = f"({right})"
+                elif self.operator == "/" and self.right.operator in ("*", "/"):
+                    right = f"({right})"
 
         return f"{left} {self.operator} {right}"
 
@@ -93,7 +101,7 @@ def parse_expression(expression):
         if enclosed:
             return parse_expression(expression[1:-1])
 
-    operators = ["+", "-", "*", "/"]
+    operators = ["+", "-", "*", "/", "^"]
 
     lowest_precedence = None
     operator_position = None
@@ -108,10 +116,12 @@ def parse_expression(expression):
             if character == "-" and (i == 0 or expression[i - 1] == "("):
                 continue
 
-            precedence = 1 if character in ("+", "-") else 2
+            precedence = 3 if character == "^" else (1 if character in ("+", "-") else 2)
 
-            if lowest_precedence is None or precedence <= lowest_precedence:
+            if lowest_precedence is None or precedence < lowest_precedence:
                 lowest_precedence = precedence
+                operator_position = i
+            elif precedence == lowest_precedence and character != "^":
                 operator_position = i
 
     if operator_position is None:
