@@ -1,5 +1,5 @@
 import pytest
-from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver, parse_token, parse_expression, linear_form, Node, Value, BinaryOp, Variable, Equation
+from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver, parse_token, parse_expression, linear_form, Node, Value, BinaryOp, Variable, Equation, Logarithm
 
 # Normal tests for some simple cases such as negative coefficient
 
@@ -262,3 +262,16 @@ def test_linear_form_division():
     )
 
     assert linear_form(expression) == (0.5, 0)
+
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        (Value(2), "ln(2)"),
+        (Variable("x"), "ln(x)"),
+        (BinaryOp(Variable("x"), "+", Value(2)), "ln(x + 2)"),
+    ]
+)
+def test_natural_logarithm_to_string(value, expected):
+    result = Logarithm(value)
+
+    assert result.to_string() == expected

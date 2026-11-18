@@ -49,6 +49,17 @@ class BinaryOp(Node):
 
         return f"{left} {self.operator} {right}"
 
+class Logarithm(Node):
+    def __init__(self, value, base=None):
+        self.value = value
+        self.base = base
+
+    def to_string(self):
+        if self.base is None:
+            return f"ln({self.value.to_string()})"
+
+        return f"log({self.value.to_string()}, {self.base.to_string()})"
+
 class Equation:
     def __init__(self, left, right):
         self.left = left
