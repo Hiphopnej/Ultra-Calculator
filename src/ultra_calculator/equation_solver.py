@@ -38,14 +38,8 @@ class BinaryOp(Node):
         if isinstance(self.left, BinaryOp) and (self.left.precedence() < self.precedence() or (self.operator == "^" and self.left.operator == "^")):
             left = f"({left})"
 
-        if isinstance(self.right, BinaryOp) and (self.right.precedence() < self.precedence() or (self.operator == "-" and self.right.operator in ("+", "-")) or (self.operator == "/" and self.right.operator in ("*", "/"))):
-            if self.right.precedence() < self.precedence():
-                right = f"({right})"
-            elif self.right.precedence() == self.precedence():
-                if self.operator == "-" and self.right.operator in ("+", "-"):
-                    right = f"({right})"
-                elif self.operator == "/" and self.right.operator in ("*", "/"):
-                    right = f"({right})"
+        if isinstance(self.right, BinaryOp) and (self.right.precedence() < self.precedence() or (self.operator == "-" and self.right.operator in ("+", "-")) or (self.operator == "/" and self.right.operator in ("*", "/")) or (self.operator == "*" and self.right.operator in ("*", "/"))):
+            right = f"({right})"
 
         return f"{left} {self.operator} {right}"
 
