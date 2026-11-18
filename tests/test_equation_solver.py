@@ -275,3 +275,29 @@ def test_natural_logarithm_to_string(value, expected):
     result = Logarithm(value)
 
     assert result.to_string() == expected
+
+@pytest.mark.parametrize(
+    "expression, expected",
+    [
+        ("log(x, 2)", "log(x, 2.0)"),
+        ("log(x + 2, 5)", "log(x + 2.0, 5.0)"),
+        ("log((x + 2) * x, 5)", "log((x + 2.0) * x, 5.0)"),
+    ]
+)
+def test_parse_logarithm(expression, expected):
+    result = parse_expression(expression)
+
+    assert result.to_string() == expected
+
+@pytest.mark.parametrize(
+    "expression",
+    [
+        "log(x, 0)",
+        "log(x, 1)",
+        "log(x, -2)",
+        "log(x, )",
+    ]
+)
+def test_parse_logarithm_invalid_base(expression):
+    with pytest.raises(ValueError):
+        parse_expression(expression)

@@ -72,6 +72,44 @@ def parse_token(token):
             Variable("x")
         )
 
+    if token.startswith("ln(") and token.endswith(")"):
+        expression = token[3:-1]
+        parsed_expression = parse_expression(expression)
+        return Logarithm(parsed_expression)
+
+    if token.startswith("log(") and token.endswith(")"):
+        expression = token[4:-1]
+        counter = 0
+        if "," not in expression:
+            raise ValueError(", has to be used to separate value and base")
+        
+        for i, char in enumerate(expression):
+            if char == "(":
+                counter += 1
+            if char == ")":
+                counter -= 1
+            if char == "," and counter == 0:
+                comma_index = i
+                break
+
+        value = expression[:comma_index].strip()
+        base = expression[comma_index+1:].strip()
+
+        if not base:
+            raise ValueError("A logarithm must have a base")
+
+        parsed_value = parse_expression(value)
+        parsed_base = parse_expression(base)
+
+        if not isinstance(parsed_base, Value):
+            raise ValueError("The logarithm base must be a numeric constant")
+
+        if parsed_base.value <= 0 or parsed_base.value == 1:
+            raise ValueError("The logarithm base must be positive and cannot be 1")
+
+        return Logarithm(parsed_value, parsed_base)
+                
+
     if token.endswith("x"):
         coefficient = token[:-1]
 
