@@ -2,7 +2,7 @@ from ultra_calculator.equation_solver import Value, Variable, BinaryOp, Logarith
 from ultra_calculator.simplify_equations import simplify
 
 # Takes a function an returns the derivative of it
-def derivative_solver(function, shouldPrint=False, shouldAsk=False):
+def derivative_solver(function=None, shouldPrint=False, shouldAsk=False):
     def finish(result):
         result = simplify(result)
 
