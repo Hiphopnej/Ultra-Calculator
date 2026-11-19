@@ -1,5 +1,6 @@
 import pytest
 from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver, parse_token, parse_expression, linear_form, Node, Value, BinaryOp, Variable, Equation, Logarithm
+from math import e as math_e
 
 # Normal tests for some simple cases such as negative coefficient
 
@@ -301,3 +302,18 @@ def test_parse_logarithm(expression, expected):
 def test_parse_logarithm_invalid_base(expression):
     with pytest.raises(ValueError):
         parse_expression(expression)
+
+def test_parse_euler_number():
+    result = parse_expression("e")
+
+    assert isinstance(result, Value)
+    assert result.value == math_e
+
+
+def test_parse_euler_exponential():
+    result = parse_expression("e^x")
+
+    assert isinstance(result, BinaryOp)
+    assert result.operator == "^"
+    assert result.left.value == math_e
+    assert isinstance(result.right, Variable)

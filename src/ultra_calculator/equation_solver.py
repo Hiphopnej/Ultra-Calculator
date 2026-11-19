@@ -1,3 +1,5 @@
+from math import e as math_e
+
 class Node:
     def to_string(self):
         raise NotImplementedError
@@ -121,6 +123,8 @@ def parse_token(token):
             "*",
             Variable("x")
         )
+    if token == "e":
+        return Value(math_e)
 
     return Value(float(token))
 
