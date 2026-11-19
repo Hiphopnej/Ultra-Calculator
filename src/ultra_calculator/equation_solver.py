@@ -5,10 +5,13 @@ class Node:
         raise NotImplementedError
 
 class Value(Node):
-    def __init__(self, value):
+    def __init__(self, value, symbol=None):
         self.value = value
+        self.symbol = symbol
 
     def to_string(self):
+        if self.symbol is not None:
+            return self.symbol
         return str(self.value)
 
 class Variable(Node):
@@ -55,6 +58,13 @@ class Logarithm(Node):
             return f"ln({self.value.to_string()})"
 
         return f"log({self.value.to_string()}, {self.base.to_string()})"
+
+class Grouped(Node):
+    def __init__(self, expression):
+        self.expression = expression
+
+    def to_string(self):
+        return f"({self.expression.to_string()})"
 
 class Equation:
     def __init__(self, left, right):
@@ -124,7 +134,7 @@ def parse_token(token):
             Variable("x")
         )
     if token == "e":
-        return Value(math_e)
+        return Value(math_e, "e")
 
     return Value(float(token))
 

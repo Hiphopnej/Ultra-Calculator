@@ -308,6 +308,7 @@ def test_parse_euler_number():
 
     assert isinstance(result, Value)
     assert result.value == math_e
+    assert result.to_string() == "e"
 
 
 def test_parse_euler_exponential():
