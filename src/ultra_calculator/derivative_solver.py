@@ -7,7 +7,7 @@ def derivative_solver(function, shouldPrint=False, shouldAsk=False):
             print(result.to_string())
         return result
     if shouldAsk:
-        function = parse_expression(input("Enter an expression: "))
+        function = input("Enter an expression: ")
 
     if isinstance(function, str):
         while True:
