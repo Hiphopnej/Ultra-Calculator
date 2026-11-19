@@ -1,8 +1,11 @@
 from ultra_calculator.equation_solver import Value, Variable, BinaryOp, Logarithm, Grouped, TrigonometricFunction, parse_expression
+from ultra_calculator.simplify_equations import simplify
 
 # Takes a function an returns the derivative of it
 def derivative_solver(function, shouldPrint=False, shouldAsk=False):
     def finish(result):
+        result = simplify(result)
+
         if shouldPrint:
             print(result.to_string())
         return result
