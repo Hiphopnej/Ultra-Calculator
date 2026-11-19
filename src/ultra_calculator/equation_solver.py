@@ -66,6 +66,14 @@ class Grouped(Node):
     def to_string(self):
         return f"({self.expression.to_string()})"
 
+class TrigonometricFunction(Node):
+    def __init__(self, function, value):
+        self.function = function
+        self.value = value
+
+    def to_string(self):
+        return f"{self.function}({self.value.to_string()})"
+
 class Equation:
     def __init__(self, left, right):
         self.left = left
@@ -83,6 +91,12 @@ def parse_token(token):
             "*",
             Variable("x")
         )
+    if token.startswith(("sin(", "cos(", "tan(")) and token.endswith(")"):
+        function = token[:3]
+        expression = token[4:-1]
+        parsed_expression = parse_expression(expression)
+
+        return TrigonometricFunction(function, parsed_expression)
 
     if token.startswith("ln(") and token.endswith(")"):
         expression = token[3:-1]

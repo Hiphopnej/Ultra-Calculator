@@ -1,5 +1,5 @@
 import pytest
-from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver, parse_token, parse_expression, linear_form, Node, Value, BinaryOp, Variable, Equation, Logarithm
+from ultra_calculator.equation_solver import parse_equation, solve_equation, equation_solver, parse_token, parse_expression, linear_form, Node, Value, BinaryOp, Variable, Equation, Logarithm, TrigonometricFunction
 from math import e as math_e
 
 # Normal tests for some simple cases such as negative coefficient
@@ -318,3 +318,20 @@ def test_parse_euler_exponential():
     assert result.operator == "^"
     assert result.left.value == math_e
     assert isinstance(result.right, Variable)
+
+@pytest.mark.parametrize(
+    "expression, expected",
+    [
+        ("sin(x)", "sin(x)"),
+        ("cos(x)", "cos(x)"),
+        ("tan(x)", "tan(x)"),
+        ("sin(x + 2)", "sin(x + 2.0)"),
+        ("cos(x ^ 2)", "cos(x ^ 2.0)"),
+        ("tan(x * (x + 2))", "tan(x * (x + 2.0))"),
+    ]
+)
+def test_parse_trigonometric_function(expression, expected):
+    result = parse_expression(expression)
+
+    assert isinstance(result, TrigonometricFunction)
+    assert result.to_string() == expected
