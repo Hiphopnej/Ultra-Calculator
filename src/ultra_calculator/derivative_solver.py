@@ -56,5 +56,5 @@ def derivative_solver(function=None, shouldPrint=False, shouldAsk=False):
                 return finish(BinaryOp(function, "*", Logarithm(function.left)))
             elif isinstance(function.right, BinaryOp):
                 return finish(BinaryOp(BinaryOp(function, "*", Logarithm(function.left)), "*", derivative_solver(function.right)))
-
-        raise ValueError("Unsupported expression")
+        raise ValueError(f"Unsupported operator: {function.operator}")
+    raise ValueError("Unsupported expression")
